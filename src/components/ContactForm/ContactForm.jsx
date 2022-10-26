@@ -1,19 +1,28 @@
 import { Button, Input, Label, FormBox, Error } from './ContactForm.styled';
 import { Formik, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
+import { nanoid } from 'nanoid';
+import { useDispatch } from 'react-redux';
+import { addContact } from '../../redux/contacts/contacts-slise';
 
 let schema = Yup.object().shape({
   name: Yup.string().min(4).max(32).required(),
 });
-
 const initialValues = {
   name: '',
   number: '',
 };
 
-export const ContactForm = ({ onSubmit }) => {
-  const handleSubmit = (values, { resetForm }) => {
-    onSubmit(values);
+export const ContactForm = () => {
+  const dispatch = useDispatch();
+
+  const handleSubmit = ({ name, number }, { resetForm }) => {
+    const newContact = {
+      id: nanoid(),
+      name,
+      number,
+    };
+    dispatch(addContact(newContact));
     resetForm();
   };
 
@@ -55,3 +64,25 @@ export const ContactForm = ({ onSubmit }) => {
     </Formik>
   );
 };
+
+//   const addContacts = ({ name, number }) => {
+//     if (
+//       contacts.some(
+//         contact =>
+//           contact.number.toLocaleLowerCase() === number.toLocaleLowerCase()
+//       )
+//     ) {
+//       toast.error(`${name} is already in contact`, {
+//         position: 'top-right',
+//         autoClose: 1000,
+//         hideProgressBar: false,
+//         closeOnClick: true,
+//         pauseOnHover: false,
+//         draggable: false,
+//         progress: undefined,
+//         theme: 'colored',
+//       });
+//     } else {
+//       //   setContacts([newContact, ...contacts]);
+//     }
+//   };
