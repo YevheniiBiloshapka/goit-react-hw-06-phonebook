@@ -64,25 +64,3 @@ export const ContactForm = () => {
     </Formik>
   );
 };
-
-//   const addContacts = ({ name, number }) => {
-//     if (
-//       contacts.some(
-//         contact =>
-//           contact.number.toLocaleLowerCase() === number.toLocaleLowerCase()
-//       )
-//     ) {
-//       toast.error(`${name} is already in contact`, {
-//         position: 'top-right',
-//         autoClose: 1000,
-//         hideProgressBar: false,
-//         closeOnClick: true,
-//         pauseOnHover: false,
-//         draggable: false,
-//         progress: undefined,
-//         theme: 'colored',
-//       });
-//     } else {
-//       //   setContacts([newContact, ...contacts]);
-//     }
-//   };
